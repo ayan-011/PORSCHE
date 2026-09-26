@@ -120,7 +120,7 @@ export default function GarageHero() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative h-[750vh] bg-garage-ink">
+    <section ref={sectionRef} className="relative h-[700vh] bg-garage-ink">
       <div
         ref={stickyRef}
         className="sticky top-0 h-screen w-full overflow-hidden bg-garage-ink"
