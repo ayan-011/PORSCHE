@@ -1,8 +1,10 @@
+
+import Statement from "./components/RevealChar";
 import Start from "./components/Start";
 
  
  
-export default function OnTrack() {
+export default function Ontrack() {
   return (
     <main className="w-full   text-[#151821] 
     relative
@@ -12,12 +14,10 @@ export default function OnTrack() {
     before:opacity-5
     before:pointer-events-none
     ">
-      
- 
-    
- 
-
+       
       <Start />
+
+      <Statement/>
 
       <section className="flex h-screen flex-col items-center justify-center gap-4 px-6 text-center">
         <h2 className="max-w-xl font-serif text-3xl leading-tight sm:text-4xl">

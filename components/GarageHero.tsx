@@ -134,11 +134,11 @@ export default function GarageHero() {
             CARS
           </span>
           <nav className="hidden gap-8 text-xs uppercase tracking-[0.25em] text-black md:flex">
-            <a href="#collection" className="transition hover:text-black/60">
-              Collection
+            <a href="#ontrack" className="transition hover:text-black/60">
+              Ontrack
             </a>
             <a href="#atelier" className="transition hover:text-black/60">
-              Atelier
+              Atelier 
             </a>
             <a href="#access" className="transition hover:text-black/60">
               Access
