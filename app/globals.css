@@ -5,6 +5,12 @@
 body {
   font-family: var(--font-formula), sans-serif;
 }
+ .font-luckies {
+  font-family: var(--font-luckies), sans-serif;
+}
+ .font-sixcap {
+  font-family: var(--font-sixcap), sans-serif;
+}
 
 :root {
   --font-display: "Anton", sans-serif;
