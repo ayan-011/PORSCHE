@@ -6,7 +6,7 @@ import Start from "./components/Start";
  
 export default function Ontrack() {
   return (
-    <main className="w-full   text-[#151821] 
+    <main  className="w-full   text-[#151821] 
     relative
     before:absolute before:inset-0
     before:bg-[url('/texture/carbonfiber2.jpg')]
@@ -15,7 +15,11 @@ export default function Ontrack() {
     before:pointer-events-none
     ">
        
-      <Start />
+      <Start
+      
+      title="01. On track"
+      image="/ontrack/trackstart.jpg"
+      />
 
       <Statement/>
 
@@ -27,6 +31,7 @@ export default function Ontrack() {
           Keep scrolling for the rest of the page.
         </p>
       </section>
+      
     </main>
   );
 }

@@ -20,11 +20,11 @@ export default function Collection() {
   return (
     <section
       id="collection"
-      className="relative bg-garage-ink px-6 py-28 md:px-12 md:py-36"
+      className="relative bg-garage-ink px-6 py-28 md:px-12 md:py-36 font-formula"
     >
       <div className="mx-auto max-w-6xl">
         <p className="mb-4 text-[11px] uppercase tracking-[0.4em] text-garage-red">
-          Inside the garage
+          COLLECTION PAGE 
         </p>
         <h2 className="max-w-2xl font-display text-4xl leading-tight text-garage-cream md:text-5xl">
           Every car earns its spot on the floor.

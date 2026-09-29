@@ -3,9 +3,14 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 
-const HERO_IMAGE = "/ontrack/trackstart.jpg";
+// const HERO_IMAGE = "/ontrack/trackstart.jpg";
 
-export default function Start() {
+type Props = {
+  title: string;
+  image: string;
+}
+
+export default function Start({title, image}: Props) {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress: rawProgress } = useScroll({
@@ -14,10 +19,11 @@ export default function Start() {
   });
 
   // Smooth out raw wheel/trackpad jumps into continuous motion.
-  const scrollYProgress = useSpring(rawProgress, {
+  const scrollYProgress = useSpring( rawProgress, {
     stiffness: 300,
     damping: 40,
     mass: 0.5,
+    
   });
 
   // Animate scale, not width/height — same visual "grow" effect,
@@ -46,8 +52,8 @@ export default function Start() {
           className="relative h-screen w-screen overflow-hidden origin-center"
         >
           <motion.img
-            src={HERO_IMAGE}
-            alt="OnTrack"
+            src={image}
+            alt={title}
             style={{ y: imageY, willChange: "transform" }}
             className="absolute -inset-y-[20%] inset-x-0 h-[140%] w-full object-cover"
           />
@@ -58,9 +64,9 @@ export default function Start() {
           <div className="absolute inset-0 flex flex-col gap-4 p-6">
             <motion.h1
               style={{ scale: titleScale, willChange: "transform" }}
-              className="font-formula mt-7 bg-gradient-to-b from-white to-transparent bg-clip-text text-transparent text-3xl font-extrabold tracking-tight sm:text-6xl md:text-8xl"
+              className="font-formula  mt-7 bg-gradient-to-b from-white to-transparent bg-clip-text text-transparent text-3xl font-extrabold tracking-tight sm:text-6xl md:text-8xl"
             >
-              <span>01.</span> ON TRACK
+              {title}
             </motion.h1>
           </div>
         </motion.div>
