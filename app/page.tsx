@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <SmoothScroll>
       <main className="bg-garage-ink">
-        {/* <GarageHero />  */}
+        <GarageHero /> 
       <section id="ontrack">
           <Ontrack />
       </section>
