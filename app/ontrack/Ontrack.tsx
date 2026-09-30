@@ -1,4 +1,5 @@
 
+import { HorizontalScroll } from "./components/HorizontalScroll";
 import Statement from "./components/RevealChar";
 import Start from "./components/Start";
 
@@ -22,6 +23,8 @@ export default function Ontrack() {
       />
 
       <Statement/>
+
+      <HorizontalScroll/>
 
       <section className="flex h-screen flex-col items-center justify-center gap-4 px-6 text-center">
         <h2 className="max-w-xl font-serif text-3xl leading-tight sm:text-4xl">
