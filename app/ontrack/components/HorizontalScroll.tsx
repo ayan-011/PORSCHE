@@ -19,13 +19,13 @@ interface CardData {
 }
 
 const CARDS: CardData[] = [
-  { title: 'Apex GT-R', text: '720 hp twin-turbo V8. Built to hold the racing line through every corner.', tag: 'Qualifying', w: 560, h: 380, top: 0.3, img: '' },
-  { title: 'Pit Crew', text: 'Four tyres in 2.1 seconds. Every second in the pit lane costs a position.', tag: 'Pit lane', w: 260, h: 190, top: 0.16, img: '' },
-  { title: 'Turn 7 Hairpin', text: 'Brake at the 50m board, rotate the car, and get on the throttle early.', tag: 'Circuit', w: 380, h: 270, top: 0.5, img: '' },
-  { title: 'Night Session', text: 'Floodlit laps under 1:32. Cooler air means more grip and more power.', tag: 'Endurance', w: 620, h: 400, top: 0.2, img: '' },
-  { title: 'Slick Compound', text: 'Soft tyres reach peak grip in two laps and fade after twelve.', tag: 'Tyres', w: 240, h: 170, top: 0.56, img: '' },
-  { title: 'Grid Start', text: 'Twenty engines, one red light, and 200 metres to the first braking zone.', tag: 'Race day', w: 400, h: 290, top: 0.28, img: '' },
-  { title: 'Chequered Flag', text: 'Lap 58 of 58. Cross the line first and the podium is yours.', tag: 'Finish', w: 540, h: 360, top: 0.36, img: '' },
+  { title: 'Apex GT-R', text: '720 hp twin-turbo V8. Built to hold the racing line through every corner.', tag: 'Qualifying', w: 560, h: 380, top: 0.3, img: '/ontrack/horizontal1.png' },
+  { title: 'Pit Crew', text: 'Four tyres in 2.1 seconds. Every second in the pit lane costs a position.', tag: 'Pit lane', w: 260, h: 190, top: 0.16, img: '/ontrack/trackcar1.jpg' },
+  { title: 'Turn 7 Hairpin', text: 'Brake at the 50m board, rotate the car, and get on the throttle early.', tag: 'Circuit', w: 380, h: 270, top: 0.5, img: '/ontrack/horizontal3.png' },
+  { title: 'Night Session', text: 'Floodlit laps under 1:32. Cooler air means more grip and more power.', tag: 'Endurance', w: 620, h: 400, top: 0.2, img: '/ontrack/horizontal4.png' },
+  { title: 'Slick Compound', text: 'Soft tyres reach peak grip in two laps and fade after twelve.', tag: 'Tyres', w: 240, h: 170, top: 0.56, img: '/ontrack/trackcar2.jpg' },
+  { title: 'Grid Start', text: 'Twenty engines, one red light, and 200 metres to the first braking zone.', tag: 'Race day', w: 400, h: 290, top: 0.28, img: '/ontrack/trackcar3.jpg' },
+  { title: 'Chequered Flag', text: 'Lap 58 of 58. Cross the line first and the podium is yours.', tag: 'Finish', w: 540, h: 360, top: 0.36, img: '/ontrack/car.webp' },
 ]
 
 const GAPS: number[] = [340, 220, 420, 260, 380, 300] // wide, uneven space between cards
