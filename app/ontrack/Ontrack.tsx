@@ -9,13 +9,24 @@ import StrechText from "./components/StretchText";
 
 export default function Ontrack() {
   return (
-    <main className="w-full   text-[#151821] 
+  <main
+  className="
     relative
-    before:absolute before:inset-0
-    before:bg-[url('/texture/carbonfiber2.jpg')] 
+    w-full
+    text-[#151821]
+    before:content-['']
+    before:fixed
+    before:inset-0
+    before:bg-[url('/texture/carbonfiber2.jpg')]
+    before:bg-cover
+    before:bg-center
+    before:bg-no-repeat
     before:opacity-5
     before:pointer-events-none
-    ">
+    before:z-0
+  "
+>
+   
 
       <Start
 
@@ -25,6 +36,7 @@ export default function Ontrack() {
 
       <Statement />
       <HorizontalScroll />
+      <div className="h-screen w-full"></div>
       <StrechText />
       <LiquidGlassLens />
 

@@ -139,7 +139,7 @@ export default function StrechText({ imageUrl = IMAGE_URL }: Props) {
 
   return (
     <main
-      className="min-h-screen bg-black uppercase text-white antialiased"
+      className="min-h-screen bg- uppercase text-white antialiased"
       style={{
         fontFamily:
           'tenon, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif',
