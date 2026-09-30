@@ -135,8 +135,8 @@ export const HorizontalScroll: React.FC = () => {
   const trackPath = buildTrack(size.w, size.h)
 
   return (
-    <div ref={wrapRef} className="relative bg-black font-sans text-[#f2f2ee]">
-      <div className="sticky top-0 h-screen overflow-hidden bg-black">
+    <div ref={wrapRef} className="relative   font-sans text-[#f2f2ee]">
+      <div className="sticky top-0 h-screen overflow-hidden  ">
         {/* Track in the background, behind the cards */}
         <svg
           className="absolute inset-0 z-0 h-full w-full"
@@ -161,7 +161,7 @@ export const HorizontalScroll: React.FC = () => {
 
         {/* Title, top-left */}
         <div className="absolute left-5 top-6 z-10 max-w-4xl sm:left-10 sm:top-9">
-          <h1 className="m-0 text-[clamp(48px,9vw,140px)] font-black uppercase leading-[0.9] tracking-tight">
+          <h1 className="font-formula m-0 text-[clamp(48px,9vw,140px)] font-black uppercase leading-[0.9] tracking-tight">
             Apex Motorsport
           </h1>
           <p className="mt-4 text-base leading-normal text-[#9a9da3]">

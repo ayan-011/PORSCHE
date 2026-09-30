@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+.font-formula {
   font-family: var(--font-formula), sans-serif;
 }
  .font-luckies {
