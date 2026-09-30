@@ -28,8 +28,7 @@ export default function Ontrack() {
 >
    
 
-      <Start
-
+      <Start 
         title="01. On track"
         image="/ontrack/trackstart.jpg"
       />
