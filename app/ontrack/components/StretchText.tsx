@@ -153,25 +153,31 @@ export default function StrechText({ imageUrl = IMAGE_URL }: Props) {
           <div className="fixed left-1/2 top-1/2 z-[1000] -ml-[30px] -mt-[30px] h-[60px] w-[60px] rounded-full bg-[#aaa] opacity-40 [animation:loaderAnim_0.7s_linear_infinite_alternate_forwards]" />
         </>
       )}
- 
-      <div ref={gridRef} className="flex flex-col  gap-[5vh]">
+
+      <div ref={gridRef} className="flex flex-col  ">
         {/* Slide 1: logo + credits */}
-        <div className="grid h-screen place-items-center gap-9">
+        <div className="grid h-screen place-items-center ">
           <div className="grid h-fit bg-red-  place-items-center  grid-rows-[1fr_auto]  ">
             <div
               className="pt-32 px-4 min-[53em]:pt-12"
-            
+
             >
-              <p className='text-white text-[45vw] -mt-60 font-sixcap select-none'>PORSCHE</p>
+              <p
+                className="text-[45vw] -mt-60 font-sixcap select-none leading-none text-neutral-800"
+                style={{
+                  WebkitMaskImage: 'linear-gradient(to bottom, #000 0%, rgba(0,0,0,0.6) 45%, transparent 75%)',
+                  maskImage: 'linear-gradient(to bottom, #000 0%, rgba(0,0,0,0.6) 45%, transparent 96%)',
+                }}
+              >
+                PORSCHE
+              </p>
             </div>
           </div>
-            <p className=" m-0 mb- text-center text-base font-light tracking-[0.25em] [word-spacing:0.75em] min-[53em]:text-[1.4vw]">
-              A scrolling demo based on Bureau DAM
-            </p>
-        </div>
 
+        </div>
+ 
         {/* Slide 2: image */}
-        <div className="grid h-screen place-items-center">
+        <div className="relative z-10 -mt-[40vh] grid h-screen place-items-center">
           <div
             className="aspect-[1.5] h-[70vh] bg-cover bg-[50%_50%]"
             style={{ backgroundImage: `url(${imageUrl})` }}
