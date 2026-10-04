@@ -1,16 +1,5 @@
 "use client"
-// RacingCalendar.tsx
-// Requires: React 18+, Tailwind CSS 3+, and the Anton font.
-//
-// Setup
-// 1. Add the font to your index.html <head> (or use next/font/google in Next.js):
-//    <link rel="preconnect" href="https://fonts.googleapis.com" />
-//    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet" />
-// 2. tailwind.config.js -> theme.extend.fontFamily:
-//    display: ['Anton', 'Impact', 'sans-serif'],
-// 3. Replace each `image` URL with your own track photo (e.g. /images/races/imola.jpg).
-//    The picsum.photos seeds are placeholders so every row already has a unique image.
-
+ 
 import { useEffect, useRef, useState } from "react";
 
 type Race = {
@@ -108,7 +97,7 @@ export default function Details() {
             }`}
           >
             <a
-              href={`#${race.id}`}
+            //   href={`#${race.id}`}
               onMouseEnter={() => setActive(i)}
               onFocus={() => setActive(i)}
               onBlur={() => setActive(null)}
