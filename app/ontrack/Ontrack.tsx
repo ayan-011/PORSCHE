@@ -1,4 +1,5 @@
 
+import Details from "./components/details";
 import { HorizontalScroll } from "./components/HorizontalScroll";
 import LiquidGlassLens from "./components/LiquidGlassLens";
 import Statement from "./components/RevealChar";
@@ -19,7 +20,8 @@ export default function Ontrack() {
       <HorizontalScroll />
       <div className="h-screen w-full"></div>
       <StrechText />
-      <LiquidGlassLens />
+      {/* <LiquidGlassLens /> */}
+      <Details/>
 
       {/* ...your last section unchanged */}
     </main>
