@@ -1,7 +1,13 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
+import { useEffect, useRef } from "react";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useSpring,
+  MotionValue,
+} from "framer-motion";
 
 // Swap this for your own still.
 const DETAIL_IMAGE = "./ontrack/img1.png";
@@ -13,19 +19,8 @@ const GRAY = "#57575c"; // not-yet-read
 const FLASH = "#d9694f"; // the word currently crossing over
 const WHITE = "#ffffff"; // already read
 
-/**
- * One letter of the headline. `index`/`total` place it along the
- * paragraph; `progress` is the section's scroll progress (0 → 1).
- * The color goes gray → flash → white across a narrow band of progress
- * centered on this letter's position, so at any given scroll position
- * only the handful of letters at the current "reading edge" show the
- * flash color — everything before is white, everything after is gray.
- */
-// The reveal only happens inside this window of scroll progress: nothing
-// moves before PHASE_START, and every letter is fully white by
-// PHASE_END. Tune these two numbers to change when the effect starts
-// and finishes — everything else derives from them.
-const PHASE_START = 0.20;
+// The reveal only happens inside this window of scroll progress.
+const PHASE_START = 0.2;
 const PHASE_END = 0.45;
 const BAND = 0.012;
 
@@ -40,12 +35,7 @@ function RevealChar({
   index: number;
   total: number;
 }) {
-  const rawPosition = index / Math.max(total - 1, 1); // 0..1 along the sentence
-  // Map that 0..1 position onto [PHASE_START, PHASE_END], leaving BAND
-  // of headroom at each end so the first letter's window starts exactly
-  // at PHASE_START and the last letter's window ends exactly at
-  // PHASE_END — that's what guarantees pure gray before PHASE_START and
-  // pure white (no leftover red) after PHASE_END.
+  const rawPosition = index / Math.max(total - 1, 1);
   const center =
     PHASE_START + BAND + rawPosition * (PHASE_END - PHASE_START - 2 * BAND);
   const color = useTransform(
@@ -57,34 +47,70 @@ function RevealChar({
 }
 
 export default function Statement() {
-  const sectionRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
 
-  // Narrow window: the reveal plays out while the section's top edge
-  // crosses from 85% down the viewport to 15% down it, so it happens
-  // early and finishes while the text is still comfortably on screen —
-  // independent of exactly how tall the section ends up being.
-  const { scrollYProgress: textProgress } = useScroll({
+  const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"],
   });
 
-  // Full pass for the image, so the drift is slower and lasts the
-  // whole time the section is in view.
-  const { scrollYProgress: sectionProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-  const imageY = useTransform(sectionProgress, [0, 1], ["-8%", "8%"]);
+  // Image drifts UPWARD as you scroll down (positive -> negative).
+  // Stay within +/-10% of the image height (the image is 130% of its
+  // frame, so there is ~13% of frame height of headroom each side).
+  const imageY = useTransform(scrollYProgress, [0, 1], ["18%", "-18%"]);
 
-  const words = HEADLINE.split(/(\s+)/); // keeps whitespace tokens for wrapping
+  // ---- Frame movement: keeps rising until the page ends ----
+  // FRAME_START: how far below its resting spot the frame begins (px).
+  // FRAME_SPEED: extra upward px per 1px of page scroll. Higher = faster.
+  //   0 = moves with the page normally, 0.8 = fast, 1.2 = very fast.
+  const FRAME_START = 250;
+  const FRAME_SPEED = 0.3;
+
+  const { scrollY } = useScroll(); // whole-page scroll, never clamped to the section
+  const sectionTop = useRef(0);
+  const viewportH = useRef(0);
+
+  useEffect(() => {
+    const measure = () => {
+      const el = sectionRef.current;
+      if (!el) return;
+      sectionTop.current = el.getBoundingClientRect().top + window.scrollY;
+      viewportH.current = window.innerHeight;
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    window.addEventListener("load", measure);
+    return () => {
+      window.removeEventListener("resize", measure);
+      window.removeEventListener("load", measure);
+    };
+  }, []);
+
+  const frameYRaw = useTransform(scrollY, (v) => {
+    // px scrolled since the section's top entered the bottom of the viewport
+    const delta = Math.max(v - (sectionTop.current - viewportH.current), 0);
+    return FRAME_START - delta * FRAME_SPEED;
+  });
+  // Snappier spring so it follows scroll quickly in both directions.
+  const frameY = useSpring(frameYRaw, { stiffness: 0, damping: 10, mass: 0.1 });
+
+  const words = HEADLINE.split(/(\s+)/);
   const totalLetters = HEADLINE.replace(/\s+/g, "").length;
   let letterIndex = 0;
 
   return (
-    <section ref={sectionRef} className="relative w-full py-24 sm:py-32">
-      <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-6 lg:grid-cols-[1.3fr_1fr] lg:gap-16 lg:px-12">
+    <section
+      ref={sectionRef}
+      className="relative w-full overflow-x-clip bg-[#0a0a0a] py-24 text-white sm:py-32 lg:py-40"
+    >
+      {/* Wide container: fluid side padding + very high max width */}
+      <div className="mx-auto grid w-full max-w-[2000px] grid-cols-1 items-center gap-14 px-[6vw] lg:grid-cols-[minmax(0,1fr)_minmax(280px,24vw)] lg:gap-[6vw] xl:px-[9vw]">
+        {/* Text column */}
         <div>
-          <h2 className="font-serif text-4xl leading-tight sm:text-5xl lg:text-6xl">
+          <h2
+            className="font-serif font-light leading-[1.05] tracking-[-0.02em]"
+            style={{ fontSize: "clamp(2.5rem, 5.8vw, 7rem)" }}
+          >
             {words.map((token, wi) => {
               if (/^\s+$/.test(token)) {
                 return <span key={wi}>{token}</span>;
@@ -96,7 +122,7 @@ export default function Statement() {
                     return (
                       <RevealChar
                         key={idx}
-                        progress={textProgress}
+                        progress={scrollYProgress}
                         index={idx}
                         total={totalLetters}
                       >
@@ -109,22 +135,28 @@ export default function Statement() {
             })}
           </h2>
 
-          <p className="mt-8 max-w-md text-sm text-white/50 sm:text-base">
+          <p className="mt-10 max-w-[34rem] text-base leading-relaxed text-white/60 sm:text-lg lg:mt-16">
             Our services are shaped with intent, from exterior styling and
-            interior refinement to performance upgrades, detailing and
-            bespoke finishes; each detail sharpens the vehicle&apos;s
-            character without overpowering it.
+            interior refinement to performance upgrades, detailing and bespoke
+            finishes; each detail sharpens the vehicle&apos;s character without
+            overpowering it.
           </p>
+
+           
         </div>
 
-        <div className="relative aspect-[4/5] w-full overflow-hidden l lg:aspect-[5/6]">
+        {/* Image column: portrait frame, parallax moves up on scroll */}
+        <motion.div
+          style={{ y: frameY }}
+          className="relative aspect-[3/4] w-full overflow-hidden  will-change-transform lg:justify-self-end"
+        >
           <motion.img
             src={DETAIL_IMAGE}
             alt=""
             style={{ y: imageY }}
-            className="absolute -inset-y-[15%] inset-x-0 h-[130%] w-full object-cover"
+            className="absolute -inset-y-[20%] inset-x-0 h-[140%] w-full object-cover"
           />
-        </div>
+        </motion.div>
       </div>
     </section>
   );
