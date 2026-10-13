@@ -17,9 +17,9 @@ export default function Home() {
 
     
 
-        <Collection />
+        {/* <Collection />
         <Atelier />
-        <AccessFooter />
+        <AccessFooter /> */}
       </main>
     </SmoothScroll>
   );
