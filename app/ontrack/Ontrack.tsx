@@ -1,5 +1,6 @@
 
 import Details from "./components/details";
+import { Footer } from "./components/footer/Footer";
 import { HorizontalScroll } from "./components/HorizontalScroll";
 import LiquidGlassLens from "./components/LiquidGlassLens";
 import Statement from "./components/RevealChar";
@@ -22,6 +23,7 @@ export default function Ontrack() {
       <StrechText />
       {/* <LiquidGlassLens /> */}
       <Details/>
+      <Footer/>
 
       {/* ...your last section unchanged */}
     </main>
