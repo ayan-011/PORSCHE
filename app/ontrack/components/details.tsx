@@ -1,5 +1,6 @@
 "use client"
  
+import { div } from "framer-motion/client";
 import { useEffect, useRef, useState } from "react";
 
 type Race = {
@@ -78,14 +79,18 @@ export default function Details() {
   };
 
   return (
+
+    <div className="bg-black">
+      <div className="mx-auto max-w-[1800px] font-formula px-6 md:px-16  text-4xl py-16">
+        <div className="text-zinc-500"><h1 className="text-7xl text-white">Porsche racing </h1>calendar 2026</div >
+      </div>
     <main
       ref={mainRef}
-      className="relative min-h-screen select-none overflow-hidden bg-black py-6 text-white"
+      className="relative min-h-screen select-none overflow-hidden  py-6 text-white"
     >
-      <h1 className="sr-only">Porsche racing calendar 2026</h1>
 
       <ul
-        className="mx-auto max-w-[1800px]"
+        className="mx-auto max-w-[1800px] "
         onMouseMove={handleMove}
         onMouseLeave={handleLeave}
       >
@@ -144,5 +149,7 @@ export default function Details() {
         </div>
       </div>
     </main>
+
+    </div>
   );
 }
